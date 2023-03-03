@@ -71,6 +71,6 @@ jobs:
           CLANG_REPO: ${{ github.event.inputs.clang_repo}}
           CHECKEDC_REPO: ${{ github.event.inputs.checkedc_repo}}
         run: |
-         cd ${{env.BUILD_SOURCESDIRECTORY}}/clang/automation/UNIX/
+         cd ${{env.BUILD_SOURCESDIRECTORY}}/test_scripts/automation/UNIX/
          ./build-and-test.sh
 

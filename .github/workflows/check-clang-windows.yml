@@ -72,5 +72,5 @@ jobs:
           CHECKEDC_REPO: ${{ github.event.inputs.checkedc_repo}}
         shell: cmd
         run: |
-         cd ${{env.BUILD_SOURCESDIRECTORY}}\clang\automation\Windows
+         cd ${{env.BUILD_SOURCESDIRECTORY}}\test_scripts\automation\UNIX\
          build-and-test.bat
