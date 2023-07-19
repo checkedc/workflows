@@ -42,7 +42,7 @@ jobs:
   # Cleanup files left behind by prior runs
   clean:
     name: Clean
-    runs-on: ubuntu-latest
+    runs-on: self-hosted macOS ARM64
     steps:
       - name: Clean
         run: |
@@ -54,9 +54,9 @@ jobs:
           mkdir -p ${{env.BUILD_SOURCESDIRECTORY}}
 
   test_CheckedC_Clang_UNIX:
-    name: Build and test Checked C Clang on UNIX
+    name: Build and test Checked C Clang on MacOS
     needs: clean
-    runs-on: ubuntu-latest
+    runs-on: self-hosted macOS ARM64
     steps:
       - name: Checkout Checked C Clang code
         uses: actions/checkout@v2
