@@ -42,7 +42,7 @@ jobs:
   # Cleanup files left behind by prior runs
   clean:
     name: Clean
-    runs-on: self-hosted macOS ARM64
+    runs-on: macOS
     steps:
       - name: Clean
         run: |
@@ -56,7 +56,7 @@ jobs:
   test_CheckedC_Clang_UNIX:
     name: Build and test Checked C Clang on MacOS
     needs: clean
-    runs-on: self-hosted macOS ARM64
+    runs-on: macOS
     steps:
       - name: Checkout Checked C Clang code
         uses: actions/checkout@v2
