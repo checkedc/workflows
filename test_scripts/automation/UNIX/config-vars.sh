@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 
+#
 # Validate and set configuration variables. Other scripts should only
 # depend on variables printed at the end of this script.
 #
@@ -20,11 +20,11 @@ CHECKEDC_CONFIG_STATUS="passed"
 
 if [ -z "$BUILDCONFIGURATION" ]; then
   echo "BUILDCONFIGURATION not set: must be set to set to one of Debug, Release, ReleaseWithDebInfo"
-  CHECKEDC_CONFIG_STATUS="error"  
-elif [ "$BUILDCONFIGURATION" != "Debug" -a "$BUILDCONFIGURATION" != "Release" -a \
-       "$BUILDCONFIGURATION" != "ReleaseWithDebInfo" ]; then
+  CHECKEDC_CONFIG_STATUS="error"
+elif [ "$BUILDCONFIGURATION" != "Debug" ] && [ "$BUILDCONFIGURATION" != "Release" ] &&
+     [ "$BUILDCONFIGURATION" != "ReleaseWithDebInfo" ]; then
   echo "Unknown BUILDCONFIGURATION value $BUILDCONFIGURATION: must be one of Debug, Release, ReleaseWithDebInfo"
-  CHECKEDC_CONFIG_STATUS="error" 
+  CHECKEDC_CONFIG_STATUS="error"
 fi
 
 if [ -z "$CLANG_REPO" ]; then
@@ -51,17 +51,17 @@ if [ -z "$BUILDOS" ]; then
   export BUILDOS="Linux"
 elif [ "$BUILDOS" != "Linux" -a "$BUILDOS" != "WSL" ]; then
   echo "Unknown BUILDOS value $BUILDOS: must be Linux or WSL"
-  CHECKEDC_CONFIG_STATUS="error" 
+  CHECKEDC_CONFIG_STATUS="error"
 fi
 
 if [ -z $BUILD_BINARIESDIRECTORY ]; then
   echo "BUILD_BINARIESDIRECTORY not set.  Set it to the directory that will contain the object directory."
-  CHECKEDC_CONFIG_STATUS="error" 
+  CHECKEDC_CONFIG_STATUS="error"
 fi
 
 if [ -z $BUILD_SOURCESDIRECTORY ]; then
   echo "BUILD_SOURCESDIRECTORY not set.  Set it to the directory that will contain the sources directory."
-  CHECKEDC_CONFIG_STATUS="error" 
+  CHECKEDC_CONFIG_STATUS="error"
 fi
 
 # Validate that TEST_TARGET_ARCH contains the valid list of targets.
@@ -85,11 +85,11 @@ export LLVM_OBJ_DIR="${BUILD_BINARIESDIRECTORY}/LLVM-${BUILDCONFIGURATION}-${BUI
 
 if [ -z "$TEST_SUITE" ]; then
   echo "TEST_SUITE not set: must be set to one of CheckedC_tests, CheckedC, CheckedC_clang, or CheckedC_LLVM"
-  CHECKEDC_CONFIG_STATUS="error" 
-elif [ "$TEST_SUITE" != "CheckedC" -a "$TEST_SUITE" != "CheckedC_clang" -a \
-       "$TEST_SUITE" != "CheckedC_LLVM" -a "$TEST_SUITE" != "CheckedC_tests"]; then
+  CHECKEDC_CONFIG_STATUS="error"
+elif [ "$TEST_SUITE" != "CheckedC" ] && [ "$TEST_SUITE" != "CheckedC_clang" ] &&
+     [ "$TEST_SUITE" != "CheckedC_LLVM" ] &&  [ "$TEST_SUITE" != "CheckedC_tests" ]; then
   echo "Unknown TEST_SUITE value $TEST_SUITE: must be one of CheckedC_tests, CheckedC, CheckedC_clang, or CheckedC_LLVM"
-  CHECKEDC_CONFIG_STATUS="error" 
+  CHECKEDC_CONFIG_STATUS="error"
 fi
 
 # SKIP_CHECKEDC_TESTS controls whether to skip the Checked C repo tests
@@ -130,7 +130,11 @@ if [ -z "$LLVM_TEST_SUITE_COMMIT" ]; then
 fi
 
 if [ -z "$BUILD_CPU_COUNT" ]; then
-  declare -i NPROC=$(nproc);
+  if [ -f "/usr/bin/uname" ] && [ "$(/usr/bin/uname)" == "Darwin" ]; then
+    declare -i NPROC="$(sysctl -n hw.physicalcpu)"
+  else
+    declare -i NPROC=$(nproc);
+  fi
   if [ "$BUILDCONFIGURATION" = "Release" ]; then
     export BUILD_CPU_COUNT=$(($NPROC*3/4))
   else
@@ -194,7 +198,7 @@ else
     export LNT_SCRIPT=/lnt-install/sandbox/bin/lnt
   fi
 fi
- 
+
 if [ "$CHECKEDC_CONFIG_STATUS" == "passed" ]; then
   echo "Configured environment variables:"
   echo
@@ -215,7 +219,7 @@ if [ "$CHECKEDC_CONFIG_STATUS" == "passed" ]; then
   echo "  BUILD_BINARIESDIRECTORY: $BUILD_BINARIESDIRECTORY"
   echo "  LLVM_OBJ_DIR: $LLVM_OBJ_DIR"
   echo "  LNT_RESULTS_DIR: $LNT_RESULTS_DIR"
-  echo 
+  echo
   echo " Branch and commit information:"
   echo "  CLANG_BRANCH: $CLANG_BRANCH"
   echo "  CLANG_COMMIT: $CLANG_COMMIT"
