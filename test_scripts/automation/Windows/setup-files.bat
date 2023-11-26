@@ -13,12 +13,12 @@ if "%BUILD_CHECKEDC_CLEAN%"=="Yes" (
   )
 )
  
-if not exist %BUILD_SOURCESDIRECTORY%\checkedc-clang\.git (
+if not exist %BUILD_SOURCESDIRECTORY%\checkedc-llvm-project\.git (
   git clone -c core.autocrlf=false https://github.com/checkedc/checkedc-llvm-project %BUILD_SOURCESDIRECTORY%\checkedc-llvm-project
   if ERRORLEVEL 1 (goto cmdfailed)
 )
 
-if not exist %BUILD_SOURCESDIRECTORY%\checkedc-clang\llvm\projects\checkedc-wrapper\checkedc\.git (
+if not exist %BUILD_SOURCESDIRECTORY%\checkedc-llvm-project\llvm\projects\checkedc-wrapper\checkedc\.git (
   git clone https://github.com/checkedc/checkedc %BUILD_SOURCESDIRECTORY%\checkedc-llvm-project\llvm\projects\checkedc-wrapper\checkedc
   if ERRORLEVEL 1 (goto cmdfailed)
 )
