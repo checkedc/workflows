@@ -42,6 +42,7 @@
 @rem  SIGN_BRANCH: signing automation branch to checkout.
 
 @setlocal
+@echo on
 @set DIRNAME=%CD%
 @call %DIRNAME%\config-vars.bat
 if ERRORLEVEL 1 (goto cmdfailed)
