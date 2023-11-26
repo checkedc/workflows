@@ -27,8 +27,8 @@ on:
       Architecture:
         description: 'Architecture'
         required: true
-        default: 'X86_64'
-        options: ['X86', 'X86_64']
+        default: 'AMD64'
+        options: ['X86', 'AMD64']
 
 env:
   builddir: "${{github.workspace}}/b/ninja"
