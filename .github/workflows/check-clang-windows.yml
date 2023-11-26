@@ -36,9 +36,9 @@ on:
         options: ['No','Yes']
 
 env:
-  builddir: "${{github.workspace}}\b\build"
+  builddir: "${{github.workspace}}\\b\\build"
   BUILDCONFIGURATION: "Release"
-  BUILD_BINARIESDIRECTORY: "${{github.workspace}}\b"
+  BUILD_BINARIESDIRECTORY: "${{github.workspace}}\\b"
   BUILD_SOURCESDIRECTORY: "${{github.workspace}}"
   TEST_TARGET_ARCH:  ${{ github.event.inputs.Architecture}}
   RUN_LOCAL:  "no"
