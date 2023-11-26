@@ -14,12 +14,12 @@ if "%BUILD_CHECKEDC_CLEAN%"=="Yes" (
 )
  
 if not exist %BUILD_SOURCESDIRECTORY%\checkedc-clang\.git (
-  git clone -c core.autocrlf=false https://github.com/Microsoft/checkedc-clang %BUILD_SOURCESDIRECTORY%\checkedc-clang
+  git clone -c core.autocrlf=false https://github.com/checkedc/checkedc-llvm-project %BUILD_SOURCESDIRECTORY%\checkedc-llvm-project
   if ERRORLEVEL 1 (goto cmdfailed)
 )
 
 if not exist %BUILD_SOURCESDIRECTORY%\checkedc-clang\llvm\projects\checkedc-wrapper\checkedc\.git (
-  git clone https://github.com/Microsoft/checkedc %BUILD_SOURCESDIRECTORY%\checkedc-clang\llvm\projects\checkedc-wrapper\checkedc
+  git clone https://github.com/checkedc/checkedc %BUILD_SOURCESDIRECTORY%\checkedc-llvm-project\llvm\projects\checkedc-wrapper\checkedc
   if ERRORLEVEL 1 (goto cmdfailed)
 )
 
@@ -34,7 +34,7 @@ if "%SIGN_INSTALLER%" NEQ "No" (
 )
 
 rem Set up clang sources
-cd %BUILD_SOURCESDIRECTORY%\checkedc-clang
+cd %BUILD_SOURCESDIRECTORY%\checkedc-llvm-project
 if ERRORLEVEL 1 (goto cmdfailed)
 git fetch origin
 if ERRORLEVEL 1 (goto cmdfailed)
@@ -52,7 +52,7 @@ if not exist %LLVM_OBJ_DIR% (
 )
 
 rem set up Checked C sources
-cd %BUILD_SOURCESDIRECTORY%\checkedc-clang\llvm\projects\checkedc-wrapper\checkedc
+cd %BUILD_SOURCESDIRECTORY%\checkedc-llvm-project\llvm\projects\checkedc-wrapper\checkedc
 if ERRORLEVEL 1 (goto cmdfailed)
 git fetch origin
 if ERRORLEVEL 1 (goto cmdfailed)
