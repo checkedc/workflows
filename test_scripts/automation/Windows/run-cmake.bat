@@ -16,16 +16,15 @@ cd %LLVM_OBJ_DIR%
 
 rem Set up the environment so CMake can find the Visual C++ compiler.
 setlocal
-for /f "usebackq tokens=*" %%i in (`vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do (
+for /f "usebackq tokens=*" %%i in (`"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do (
   set InstallDir=%%i
 )
 
 if exist "%InstallDir%\VC\Auxiliary\Build" (
-  "%InstallDir%\VC\Auxiliary\BuildC\vcvars32.bat
+  call "%InstallDir%\VC\Auxiliary\Build\vcvars64.bat"
 )
 
-cmake -G Ninja %EXTRA_FLAGS% -DCMAKE_BUILD_TYPE=%BUILDCONFIGURATION% DLLVM_ENABLE_PROJECTS=clang -DLLVM_INSTALL_TOOLCHAIN_ONLY=ON %BUILD_SOURCESDIRECTORY%\checkedc-llvm-project\llvm 
-if ERRORLEVEL 1 (goto cmdfailed)
+cmake -G Ninja %EXTRA_FLAGS% -DCMAKE_BUILD_TYPE=%BUILDCONFIGURATION% -DLLVM_ENABLE_PROJECTS=clang -DLLVM_INSTALL_TOOLCHAIN_ONLY=ON %BUILD_SOURCESDIRECTORY%\checkedc-llvm-project\llvm
 endlocal
 
 :succeeded
