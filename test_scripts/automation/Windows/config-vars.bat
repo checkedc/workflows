@@ -9,7 +9,15 @@ rem running it manually, the variables must be set by the user.
 
 rem Create configuration variables
 
-set MSBUILD_VERBOSITY=n
+rem Set up the environment for the Visual C++ compiler.
+
+for /f "usebackq tokens=*" %%i in (`"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do (
+  set InstallDir=%%i
+)
+
+if exist "%InstallDir%\VC\Auxiliary\Build" (
+  call "%InstallDir%\VC\Auxiliary\Build\vcvars64.bat"
+)
 
 if NOT DEFINED BUILD_CHECKEDC_CLEAN (
   if DEFINED BUILD_CLEAN (
