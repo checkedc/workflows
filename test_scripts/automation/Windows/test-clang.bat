@@ -20,9 +20,10 @@ if "%TEST_SUITE%"=="CheckedC" (
   rem
 ) else if "%TEST_SUITE%"=="CheckedC_clang" (
     ninja -j %MSBUILD_CPU_COUNT% check-clang
+    if ERRORLEVEL 1 (goto cmdfailed)
 ) else if "%TEST_SUITE%"=="CheckedC_LLVM" (
     ninja -j %MSBUILD_CPU_COUNT% check-all
-  if ERRORLEVEL 1 (goto cmdfailed)
+    if ERRORLEVEL 1 (goto cmdfailed)
 )
 
 :succeeded
