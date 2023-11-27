@@ -12,17 +12,16 @@ cd %LLVM_OBJ_DIR%
 if "%SKIP_CHECKEDC_TESTS%"=="Yes" (
   rem
 ) else (
-  "%MSBUILD_BIN%" projects\checkedc-wrapper\check-checkedc.vcxproj /p:Configuration=%BUILDCONFIGURATION% /v:%MSBUILD_VERBOSITY% /maxcpucount:%MSBUILD_CPU_COUNT% /p:CL_MPCount=%CL_CPU_COUNT%
+  ninja -j %MSBUILD_CPU_COUNT% check-checkedc
   if ERRORLEVEL 1 (goto cmdfailed)
 )
 
 if "%TEST_SUITE%"=="CheckedC" (
   rem
 ) else if "%TEST_SUITE%"=="CheckedC_clang" (
-  "%MSBUILD_BIN%" tools\clang\test\check-clang.vcxproj /p:Configuration=%BUILDCONFIGURATION% /v:%MSBUILD_VERBOSITY% /maxcpucount:%MSBUILD_CPU_COUNT% /p:CL_MPCount=%CL_CPU_COUNT%
-  if ERRORLEVEL 1 (goto cmdfailed)
+    ninja -j %MSBUILD_CPU_COUNT% check-clang
 ) else if "%TEST_SUITE%"=="CheckedC_LLVM" (
-  "%MSBUILD_BIN%" check-all.vcxproj /p:Configuration=%BUILDCONFIGURATION% /v:%MSBUILD_VERBOSITY% /maxcpucount:%MSBUILD_CPU_COUNT% /p:CL_MPCount=%CL_CPU_COUNT%
+    ninja -j %MSBUILD_CPU_COUNT% check-all
   if ERRORLEVEL 1 (goto cmdfailed)
 )
 

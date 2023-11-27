@@ -176,22 +176,12 @@ if not defined CLANG_COMMIT (
   set CLANG_COMMIT=HEAD
 )
 
-if NOT DEFINED MSBUILD_BIN (
- @rem used to be: set "MSBUILD_BIN=%programfiles(x86)%\MSBuild\15.0\Bin\MSBuild.exe"
- set "MSBUILD_BIN=%programfiles(x86)%\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe"
-)
-
 if NOT DEFINED MSBUILD_CPU_COUNT (
   if DEFINED NUMBER_OF_PROCESSORS (
     set MSBUILD_CPU_COUNT=%NUMBER_OF_PROCESSORS%
   ) else (
     set MSBUILD_CPU_COUNT=2
   )
-)
-
-if NOT DEFINED CL_CPU_COUNT (
-  rem It would be better to calculate this based on total physical memory availablity.
-  set CL_CPU_COUNT=4
 )
 
 echo Configured environment variables:
@@ -217,8 +207,6 @@ echo.    CHECKEDC BRANCH: %CHECKEDC_BRANCH%
 echo.    CHECKEDC_COMMIT: %CHECKEDC_COMMIT%
 echo.    SIGN_BRANCH: %SIGN_BRANCH%
 echo.
-echo.  MSBUILD_BIN: %MSBUILD_BIN%
 echo.  MSBUILD_CPU_COUNT: %MSBUILD_CPU_COUNT%
-echo.  CL_CPU_COUNT: %CL_CPU_COUNT%
 
 exit /b 0
