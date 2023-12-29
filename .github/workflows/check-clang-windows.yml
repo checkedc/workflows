@@ -47,7 +47,7 @@ env:
 jobs:
   test_CheckedC_Clang_on_windows :
     name: Build Checked C clang and test it on Windows
-    runs-on: [ Windows, X64 ]
+    runs-on: [ windows-latest ]
     steps:
       - name: Checkout Checked C Clang code
         uses: actions/checkout@v2
