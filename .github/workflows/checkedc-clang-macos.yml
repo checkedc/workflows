@@ -53,7 +53,7 @@ jobs:
           rm -rf ${{env.BUILD_SOURCESDIRECTORY}}
           mkdir -p ${{env.BUILD_SOURCESDIRECTORY}}
 
-  test_CheckedC_Clang_UNIX:
+  test_CheckedC_Clang_MacOS:
     name: Build and test Checked C Clang on MacOS
     needs: clean
     runs-on: macOS
