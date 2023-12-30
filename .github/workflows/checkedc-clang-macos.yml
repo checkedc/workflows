@@ -42,7 +42,7 @@ jobs:
   # Cleanup files left behind by prior runs
   clean:
     name: Clean
-    runs-on: macOS
+    runs-on: [ macos-latest ]
     steps:
       - name: Clean
         run: |
