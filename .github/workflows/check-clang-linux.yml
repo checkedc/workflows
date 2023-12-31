@@ -1,4 +1,4 @@
-name: Checked C Clang CI Linux]
+name: Checked C Clang CI [Linux]
 
 on:
   workflow_dispatch:
