@@ -49,6 +49,10 @@ jobs:
     name: Build Checked C clang and test it on Windows
     runs-on: [ windows-latest ]
     steps:
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
       - name: Checkout Checked C Clang code
         uses: actions/checkout@v2
         with:
