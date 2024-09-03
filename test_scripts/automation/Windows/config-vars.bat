@@ -52,6 +52,16 @@ if NOT DEFINED BUILDCONFIGURATION (
   exit /b 1
 )
 
+if NOT DEFINED CLANG_REPO (
+  echo CLANG_REPO not set: must be set to the URL of the Clang repository
+  exit /b /1
+)
+
+if NOT DEFINED CHECKEDC_REPO (
+  echo CHECKEDC_REPO not set: must be set to the URL of the Clang repository
+  exit /b /1
+)
+
 rem Validate build OS
 
 if NOT DEFINED BUILDOS (
@@ -195,6 +205,8 @@ if NOT DEFINED MSBUILD_CPU_COUNT (
 echo Configured environment variables:
 echo.
 echo.  BUILDCONFIGURATION: %BUILDCONFIGURATION%
+echo.  CLANG_REPO: %CLANG_REPO%
+echo.  CHECKEDC_REPO: %CHECKEDC_REPO%
 echo.  BUILDOS: %BUILDOS%
 echo.  TEST_TARGET_ARCH: %TEST_TARGET_ARCH%
 echo.  TEST_SUITE: %TEST_SUITE%
