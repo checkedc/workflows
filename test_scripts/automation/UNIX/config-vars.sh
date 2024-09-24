@@ -203,6 +203,8 @@ if [ "$CHECKEDC_CONFIG_STATUS" == "passed" ]; then
   echo "Configured environment variables:"
   echo
   echo " BUILDCONFIGURATION: $BUILDCONFIGURATION"
+  echo " CLANG_REPO: $CLANG_REPO"
+  echo " CHECKEDC_REPO: $CHECKEDC_REPO"
   echo " BUILD_PACKAGE: $BUILD_PACKAGE"
   echo " BUILDOS: $BUILDOS"
   echo " TEST_TARGET_ARCH: $TEST_TARGET_ARCH"

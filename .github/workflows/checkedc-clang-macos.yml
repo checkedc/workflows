@@ -18,7 +18,7 @@ on:
       clang_repo:
         description: 'Clang Repo name'
         required: true
-        default: 'https://github.com/checkedc/checkedc-llvm-project.git'
+        default: 'https://github.com/checkedc/checkedc-clang.git'
       testType:
         description: 'Test Type'
         required: true
@@ -42,7 +42,7 @@ jobs:
   # Cleanup files left behind by prior runs
   clean:
     name: Clean
-    runs-on: macOS
+    runs-on: [ macos-latest ]
     steps:
       - name: Clean
         run: |
@@ -53,10 +53,10 @@ jobs:
           rm -rf ${{env.BUILD_SOURCESDIRECTORY}}
           mkdir -p ${{env.BUILD_SOURCESDIRECTORY}}
 
-  test_CheckedC_Clang_UNIX:
+  test_CheckedC_Clang_MacOS:
     name: Build and test Checked C Clang on MacOS
     needs: clean
-    runs-on: macOS
+    runs-on: [ macos-latest ]
     steps:
       - name: Checkout Checked C Clang code
         uses: actions/checkout@v2

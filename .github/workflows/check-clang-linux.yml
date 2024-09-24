@@ -1,4 +1,4 @@
-name: Checked C Clang CI Linux]
+name: Checked C Clang CI [Linux]
 
 on:
   workflow_dispatch:
@@ -18,7 +18,7 @@ on:
       clang_repo:
         description: 'Clang Repo name'
         required: true
-        default: 'https://github.com/checkedc/checkedc-llvm-project.git'
+        default: 'https://github.com/checkedc/checkedc-clang.git'
       testType:
         description: 'Test Type'
         required: true
